@@ -95,7 +95,7 @@ namespace Lab1
                 double max = 0;
                 for(int i=0;i<list.Count;i++)
                 {
-                    for (int j = 0; j < list.Count; j++)
+                    for (int j = i+1; j < list.Count; j++)
                     {
                         double temp = Vector2.Distance(list[i].vec, list[j].vec);
                         if (temp > max)
@@ -107,7 +107,8 @@ namespace Lab1
         }
         public override string ToString()
         {
-            return list[0].GetType()+" "+list[0].x.GetType().ToString()+"\nThe count of list is "+list.Count+" \n";
+           // return list[0].GetType()+" "+list[0].x.GetType().ToString()+
+              return "\nThe count of list is " +list.Count+" \n";
         }
         public override string ToLongString(string format)
         {
@@ -169,32 +170,34 @@ namespace Lab1
             { 
                 double max = 0;
 
-                for (int l = 0; l < Count_node_x; l++)
-                {
-                    for (int k = 0; k < Count_node_y; k++)
-                    {
-                        
-                        for ( int i=0; i < Count_node_x; i++)
-                        {
+                /*for (int l = 0; l < Count_node_x; l++)
+                 {
+                     for (int k = 0; k < Count_node_y; k++)
+                     {
 
-                            for (int j=0; j < Count_node_y; j++)
-                            {
-                                if ((i == l && j > k) || (i > l))
-                                {
-                                    double temp = Vector2.Distance(Array[l, k], Array[i, j]);
-                                    if (temp > max)
-                                        max = temp;
-                                }
-                            }
-                        }
-                    }
-                }
+                         for ( int i=0; i < Count_node_x; i++)
+                         {
+
+                             for (int j=0; j < Count_node_y; j++)
+                             {
+                                 if ((i == l && j > k) || (i > l))
+                                 {
+                                     double temp = Vector2.Distance(Array[l, k], Array[i, j]);
+                                     if (temp > max)
+                                         max = temp;
+                                 }
+                             }
+                         }
+                     }
+                 } */
+                max = Math.Sqrt(Math.Pow((Count_node_x-1) * Scale_x, 2) + Math.Pow((Count_node_y-1) * Scale_y, 2));
                 return max;
             }
         }
         public override string ToString()
         {
-            return Array[0,0].GetType().ToString() + "\nThe count of Array is " + Count.ToString() + " \n";
+            //return Array[0,0].GetType().ToString() + 
+                return "\nThe count of Array is " + Count.ToString() + " \n";
         }
         public override string ToLongString(string format)
         {
@@ -313,15 +316,16 @@ namespace Lab1
             System.Console.WriteLine(list1.MaxDistance);
             */
             FdblVector2 fdbl = new FdblVector2(sta.init_vector2);
-            V3DataArray v3Data = new V3DataArray("f2", DateTime.Now,2,3,0.5f,0.8f,fdbl);
+            V3DataArray v3Data = new V3DataArray("f2", DateTime.Now,5,5,0.3f,0.8f,fdbl);
             System.Console.WriteLine(v3Data.ToLongString("f2"));
             V3DataList dataList = (V3DataList)v3Data;
             System.Console.WriteLine("The count of element in array =" + v3Data.Count);
             System.Console.WriteLine("The count of element in list =" + dataList.Count);
 
-            System.Console.WriteLine("The MaxDistance in list ="+v3Data.MaxDistance);
-            System.Console.WriteLine("The MaxDistance in array ="+dataList.MaxDistance);
             
+            System.Console.WriteLine("The MaxDistance in array ="+ v3Data.MaxDistance);
+            System.Console.WriteLine("The MaxDistance in list =" + dataList.MaxDistance);
+
             V3MainCollection collection = new V3MainCollection();
             collection.Add(v3Data);
             collection.Add(dataList);
