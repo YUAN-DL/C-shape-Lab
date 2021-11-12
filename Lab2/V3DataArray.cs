@@ -137,6 +137,17 @@ namespace Lab2
         }
         public bool LoadText(string filename, ref V3DataArray v3)
         {
+            CultureInfo CI = new CultureInfo(System.Threading.Thread.CurrentThread.CurrentCulture.Name);
+            CultureInfo CIen = new CultureInfo("en-US");
+            CultureInfo CIru = new CultureInfo("ru-RU");
+            CultureInfo CIzh = new CultureInfo("zh-CN");
+            if ((CI == CIru) || (CI == CIzh) || (CI == CIen))
+                if (CI == CIru)
+                    CI = CIru;
+                else if (CI == CIzh)
+                    CI = CIzh;
+                else
+                    CI = CIen;
             StreamReader sr = null;
             try
             {
@@ -149,19 +160,19 @@ namespace Lab2
                     v3.date_time = date;
                     string phrase_nodes = sr.ReadLine();
                     string[] str3 = phrase_nodes.Split(' ');
-                    v3.Count_node_x = int.Parse(str3[0]);
-                    v3.Count_node_y = int.Parse(str3[1]);
+                    v3.Count_node_x = int.Parse(str3[0],CI);
+                    v3.Count_node_y = int.Parse(str3[1],CI);
                     string phrase_scale = sr.ReadLine();
                     str3 = phrase_scale.Split(' ');
-                    v3.Scale_x = double.Parse(str3[0]);
-                    v3.Scale_y = double.Parse(str3[1]);
+                    v3.Scale_x = double.Parse(str3[0],CI);
+                    v3.Scale_y = double.Parse(str3[1],CI);
                     v3.Array = new Vector2[v3.Count_node_x, v3.Count_node_y];
                     for (int i = 0; i < v3.Count_node_x; i++)
                     {
                         for (int j = 0; j < v3.Count_node_y; j++)
                         {
                             str3 = sr.ReadLine().Split(' ');
-                            v3.Array[i, j] = new Vector2(float.Parse(str3[0]), float.Parse(str3[1]));
+                            v3.Array[i, j] = new Vector2(float.Parse(str3[0],CI), float.Parse(str3[1], CI));
                         }
                     }
                 }

@@ -14,21 +14,23 @@ namespace Lab2
         static void Main(string[] args)
         {
             test1();
+            var number = double.Parse("1,8");
+            Console.WriteLine(number);
         }
         static void test1()
         {
             Console.WriteLine("****************************V3DataArray*************************");
             string file1name = "input.txt";
-            Console.WriteLine("1.Создать объект V3DataArray.");
+          //  Console.WriteLine("1.Создать объект V3DataArray.");
             FdblVector2 fdbl = new FdblVector2(sta.init_vector2);
-            V3DataArray v3Data = new V3DataArray("f2", DateTime.Now, 2, 3, 0.3, 0.8, fdbl);
-            Console.WriteLine("2. Сохранить его в файле.");
-            v3Data.SaveAsText(file1name);
+          //  V3DataArray v3Data = new V3DataArray("f2", DateTime.Now, 2, 3, 0.3, 0.8, fdbl);
+           // Console.WriteLine("2. Сохранить его в файле.");
+           // v3Data.SaveAsText(file1name);
             Console.WriteLine("3.Восстановить объект из файла");
             V3DataArray v3 = new V3DataArray("f2", DateTime.Now);
             v3.LoadText(file1name, ref v3);
             Console.WriteLine("4.Вывести исходный объект:");
-            Console.WriteLine(v3Data.ToLongString("f2"));
+           // Console.WriteLine(v3Data.ToLongString("f2"));
             Console.WriteLine("5.Вывести сохраненный объект:");
             Console.WriteLine(v3.ToLongString("f2"));
             Console.WriteLine("****************************V3DataArray*************************");

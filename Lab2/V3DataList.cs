@@ -126,6 +126,17 @@ namespace Lab2
         }
         public bool LoadBinary(string filename,ref V3DataList v3)
         {
+            CultureInfo CI = new CultureInfo(System.Threading.Thread.CurrentThread.CurrentCulture.Name);
+            CultureInfo CIen = new CultureInfo("en-US");
+            CultureInfo CIru = new CultureInfo("ru-RU");
+            CultureInfo CIzh = new CultureInfo("zh-CN");
+            if ((CI == CIru) || (CI == CIzh) || (CI == CIen))
+                if (CI == CIru)
+                    CI = CIru;
+                else if (CI == CIzh)
+                    CI = CIzh;
+                else
+                    CI = CIen;
             BinaryReader br = null;
             try
             {
@@ -137,7 +148,7 @@ namespace Lab2
                     {
                         string str = br.ReadString();
                         string[] temp = str.Split(' ');
-                        v3.Add(new Dataltem(double.Parse(temp[0]), double.Parse(temp[1]), new Vector2(float.Parse(temp[0]), float.Parse(temp[1]))));
+                        v3.Add(new Dataltem(double.Parse(temp[0],CI), double.Parse(temp[1], CI), new Vector2(float.Parse(temp[0], CI), float.Parse(temp[1], CI))));
                     }
                 }
                
