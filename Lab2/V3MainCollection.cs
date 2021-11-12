@@ -8,7 +8,7 @@ using System.IO;
 using System.Globalization;
 namespace Lab2
 {
-    class V3MainCollection
+    class V3MainCollection : IEnumerable<Dataltem>
     {
         private List<V3Data> v3s = new List<V3Data>();
         public int Count
@@ -50,6 +50,7 @@ namespace Lab2
             string str = "";
             for (int i = 0; i < Count; i++)
             {
+                str += "-------------------Collection " + i.ToString()+":-------------------";
                 str += v3s[i].ToLongString(format);
             }
             return str;
@@ -64,6 +65,79 @@ namespace Lab2
             return str;
         }
 
-        public IEnumerable<double> squares = Enumerable.Range(1, 100).Select(x => Math.Pow(x, 2));
+        public IEnumerator<Dataltem> GetEnumerator()
+        {
+            return ((IEnumerable<Dataltem>)v3s).GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable)v3s).GetEnumerator();
+        }
+
+        public Dataltem? Max
+        {
+            get
+            {
+                if (v3s.Count == 0)
+                    return null;
+                IEnumerable<Dataltem> array = from elem in (from data in v3s
+                                                            where data is V3DataArray
+                                                            select (V3DataArray)data)
+                                              from item in elem
+                                              select item;
+                IEnumerable<Dataltem> list = from elem in (from data in v3s
+                                                           where data is V3DataList
+                                                           select (V3DataList)data)
+                                             from item in elem
+                                             select item;
+                IEnumerable<Dataltem> items = array.Union(list);
+                return items.OrderByDescending(x => x.vec.Length()).First();
+            }
+
+        }
+        public IEnumerable<double> query_x
+        {
+            get
+            {
+                if (v3s.Count == 0)
+                    return null;
+                IEnumerable<Dataltem> array = from elem in (from data in v3s
+                                                            where data is V3DataArray
+                                                            select (V3DataArray)data)
+                                              from item in elem
+                                              select item;
+                IEnumerable<Dataltem> list = from elem in (from data in v3s
+                                                           where data is V3DataList
+                                                           select (V3DataList)data)
+                                             from item in elem
+                                             select item;
+                IEnumerable<Dataltem> items = array.Union(list);
+                IEnumerable<double> query = from i in items
+                                            select i.x;
+                var group = query.GroupBy(x=>x);
+                IEnumerable<double> query2 = from i in @group
+                                             where i.Count() > 1
+                                             select i.Key;
+                return query2;
+            }
+        }
+        public IEnumerable<V3Data> query_time
+        {
+            get
+            {
+                if (v3s.Count == 0)
+                    return null;
+                IEnumerable<V3Data> v3Datas = from elem in v3s
+                                              select elem;
+                v3Datas=v3Datas.OrderBy(x=>x.date_time);
+                IEnumerable<V3Data> query = from i in v3Datas
+                                            where (i.date_time == v3Datas.First().date_time)&& (i.Count>0)
+                                            select i;
+                return query;
+
+            }
+        }
+
     }
 }

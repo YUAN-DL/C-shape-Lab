@@ -20,7 +20,7 @@ namespace Lab2
         }
         public string TolongString(string format)
         {
-            return x.ToString(format) + " " + y.ToString(format) + "\n" + vec.ToString();
+            return "x:"+x.ToString(format) + "  y:" + y.ToString(format) + "\n" +"vector: "+vec.ToString();
         }
         public override string ToString()
         {

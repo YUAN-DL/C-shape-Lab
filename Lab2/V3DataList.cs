@@ -71,15 +71,15 @@ namespace Lab2
         public override string ToString()
         {
             // return list[0].GetType()+" "+list[0].x.GetType().ToString()+
-            return "\nThe count of list is " + list.Count + " \n";
+            return "\nThe element's count of list is " + list.Count + " \n";
         }
         public override string ToLongString(string format)
         {
             string str = date_time.ToString() + "\n";
             for (int i = 0; i < list.Count; i++)
             {
-                str += "Point " + i + " x:" + (list[i].x).ToString(format) + "  y:" + (list[i].y).ToString(format) + "\n";
-                str += "Vector " + i + " x:" + (list[i].vec.X).ToString(format) + "  y:" + (list[i].vec.Y).ToString(format) + "  ";
+                str += "Point" + i + ": x:" + (list[i].x).ToString(format) + "  y:" + (list[i].y).ToString(format) + " ";
+                str += "Vector" + i + ": x:" + (list[i].vec.X).ToString(format) + "  y:" + (list[i].vec.Y).ToString(format) + "  ";
                 str += "Vector" + i + "'s module:" + (Math.Sqrt(Math.Pow(list[i].vec.X, 2) + Math.Pow(list[i].vec.Y, 2))).ToString(format) + "\n";
             }
             return this.ToString() + str;

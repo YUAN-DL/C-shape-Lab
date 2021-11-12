@@ -13,7 +13,8 @@ namespace Lab2
     {
         static void Main(string[] args)
         {
-            test1();
+           test1();
+           //test2();
         }
         static void test1()
         {
@@ -48,6 +49,40 @@ namespace Lab2
             Console.WriteLine("5.Вывести сохраненный объект:");
             Console.WriteLine(list2.ToLongString("f2"));
             Console.WriteLine("----------------------------V3DataList----------------------------");
+        }
+        static void test2()
+        {
+            Console.WriteLine("1.Создать объект типа V3MainCollection");
+            V3MainCollection collection = new V3MainCollection();
+            Console.WriteLine("2.Добавить элементы в коллекцию List<V3Data>"); 
+            FdblVector2 fdbl = new FdblVector2(sta.init_vector2);
+            V3DataArray v3Data1 = new V3DataArray("f2", DateTime.Now, 2, 3, 0.3, 0.8, fdbl);
+            V3DataList list1 = new V3DataList("f2", new DateTime(2021,10,10,15,3,4,5));
+            list1.AddDefaults(5, fdbl);
+            V3DataArray v3Data2 = new V3DataArray("f2", DateTime.Now); // в этом массиве число узлов сетки равно 0.
+            V3DataList list2 = new V3DataList("f2", new DateTime(2021, 10, 10, 15, 3, 4, 5)); // в этом списке нет элементов.
+            collection.Add(v3Data1);
+            collection.Add(list1);
+            collection.Add(v3Data2);
+            collection.Add(list2);
+
+            Console.WriteLine("3.Вывести всю коллекцию");
+            Console.WriteLine(collection.ToLongString("f2"));
+            Console.WriteLine("4.DataItem с максимальным расстоянием от точки до начала координат в коллекции V3MainCollection:");
+            Dataltem data = (Dataltem)collection.Max;
+            Console.WriteLine(data.TolongString("f2"));
+
+            Console.WriteLine("5.Все координаты x ,которые появились более один раз:");
+            foreach (var x in collection.query_x)
+            {
+                Console.WriteLine(x+" ");
+            }
+            Console.WriteLine("6.Все элементы из V3MainCollection с минимальным значением даты измерения:");
+            foreach(var x in collection.query_time)
+            {
+                Console.WriteLine(x.ToLongString("f2")+"\n");
+            }
+            
         }
     }
 }

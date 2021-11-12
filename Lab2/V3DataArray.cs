@@ -70,7 +70,7 @@ namespace Lab2
                 for (int j = 0; j < Count_node_y; j++)
                 {
                     str += "coordinate:  [" + i + "," + j + "] vector:" + Array[i, j].ToString() + "   ";
-                    str += "The module of this vector:" + (Math.Sqrt(Math.Pow(Array[i, j].X, 2) + Math.Pow(Array[i, j].Y, 2))).ToString(format) + "\n";
+                    str += "Vector's module:" + (Math.Sqrt(Math.Pow(Array[i, j].X, 2) + Math.Pow(Array[i, j].Y, 2))).ToString(format) + "\n";
                 }
             }
             return this.ToString() + str;
