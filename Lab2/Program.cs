@@ -14,7 +14,7 @@ namespace Lab2
         static void Main(string[] args)
         {
            test1();
-           //test2();
+           test2();
         }
         static void test1()
         {
@@ -26,7 +26,7 @@ namespace Lab2
             Console.WriteLine("2. Сохранить его в файле.");
             v3Data.SaveAsText(file1name);
             Console.WriteLine("3.Восстановить объект из файла");
-            V3DataArray v3 = new V3DataArray("f2", DateTime.Now);
+            V3DataArray v3 = new V3DataArray("f2", DateTime.Now); 
             v3.LoadText(file1name, ref v3);
             Console.WriteLine("4.Вывести исходный объект:");
             Console.WriteLine(v3Data.ToLongString("f2"));

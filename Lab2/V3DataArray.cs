@@ -141,13 +141,6 @@ namespace Lab2
             CultureInfo CIen = new CultureInfo("en-US");
             CultureInfo CIru = new CultureInfo("ru-RU");
             CultureInfo CIzh = new CultureInfo("zh-CN");
-            if ((CI == CIru) || (CI == CIzh) || (CI == CIen))
-                if (CI == CIru)
-                    CI = CIru;
-                else if (CI == CIzh)
-                    CI = CIzh;
-                else
-                    CI = CIen;
             StreamReader sr = null;
             try
             {
