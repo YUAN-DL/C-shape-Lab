@@ -69,14 +69,14 @@ namespace Lab2
             {
                 for (int j = 0; j < Count_node_y; j++)
                 {
-                    str += "coordinate:  [" + i + "," + j + "] vector:" + Array[i, j].ToString() + "   ";
+                    str += "coordinate:  [" + i*Scale_x + "," + j*Scale_y + "] vector:" + Array[i, j].ToString() + "   ";
                     str += "Vector's module:" + (Math.Sqrt(Math.Pow(Array[i, j].X, 2) + Math.Pow(Array[i, j].Y, 2))).ToString(format) + "\n";
                 }
             }
             return this.ToString() + str;
         }
 
-        public IEnumerator<Dataltem> GetEnumerator()
+        public override IEnumerator<Dataltem> GetEnumerator()
         {
             for (int i = 0; i < Count_node_x; i++)
                 for (int j = 0; j < Count_node_y; j++)
@@ -138,9 +138,7 @@ namespace Lab2
         public bool LoadText(string filename, ref V3DataArray v3)
         {
             CultureInfo CI = new CultureInfo(System.Threading.Thread.CurrentThread.CurrentCulture.Name);
-            CultureInfo CIen = new CultureInfo("en-US");
-            CultureInfo CIru = new CultureInfo("ru-RU");
-            CultureInfo CIzh = new CultureInfo("zh-CN");
+     
             StreamReader sr = null;
             try
             {
@@ -149,7 +147,7 @@ namespace Lab2
                     string str1 = sr.ReadLine();
                     v3.info = str1;
                     string str2 = sr.ReadLine();
-                    DateTime date = DateTime.Parse(str2, new CultureInfo("en-US", true));
+                    DateTime date = DateTime.Parse(str2);
                     v3.date_time = date;
                     string phrase_nodes = sr.ReadLine();
                     string[] str3 = phrase_nodes.Split(' ');

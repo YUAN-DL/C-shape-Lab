@@ -13,7 +13,7 @@ namespace Lab2
     {
         static void Main(string[] args)
         {
-           test1();
+          // test1();
            test2();
         }
         static void test1()
@@ -59,13 +59,17 @@ namespace Lab2
             V3DataArray v3Data1 = new V3DataArray("f2", DateTime.Now, 2, 3, 0.3, 0.8, fdbl);
             V3DataList list1 = new V3DataList("f2", new DateTime(2021,10,10,15,3,4,5));
             list1.AddDefaults(5, fdbl);
+            list1.Add(new Dataltem(8, 8, new Vector2(1, 1)));
+            list1.Add(new Dataltem(7, 8, new Vector2(1, 1)));
             V3DataArray v3Data2 = new V3DataArray("f2", DateTime.Now); // в этом массиве число узлов сетки равно 0.
             V3DataList list2 = new V3DataList("f2", new DateTime(2021, 10, 10, 15, 3, 4, 5)); // в этом списке нет элементов.
+           
+            list2.Add(new Dataltem(8, 8, new Vector2(1, 1)));
+            list2.Add(new Dataltem(7, 8, new Vector2(1, 1)));
             collection.Add(v3Data1);
             collection.Add(list1);
             collection.Add(v3Data2);
             collection.Add(list2);
-
             Console.WriteLine("3.Вывести всю коллекцию");
             Console.WriteLine(collection.ToLongString("f2"));
             Console.WriteLine("4.DataItem с максимальным расстоянием от точки до начала координат в коллекции V3MainCollection:");
@@ -77,6 +81,7 @@ namespace Lab2
             {
                 Console.WriteLine(x+" ");
             }
+            Console.WriteLine("------------------------------\n");
             Console.WriteLine("6.Все элементы из V3MainCollection с минимальным значением даты измерения:");
             foreach(var x in collection.query_time)
             {

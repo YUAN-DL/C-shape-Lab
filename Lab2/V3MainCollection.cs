@@ -81,17 +81,9 @@ namespace Lab2
             {
                 if (v3s.Count == 0)
                     return null;
-                IEnumerable<Dataltem> array = from elem in (from data in v3s
-                                                            where data is V3DataArray
-                                                            select (V3DataArray)data)
-                                              from item in elem
-                                              select item;
-                IEnumerable<Dataltem> list = from elem in (from data in v3s
-                                                           where data is V3DataList
-                                                           select (V3DataList)data)
+                IEnumerable<Dataltem> items = from elem in v3s
                                              from item in elem
                                              select item;
-                IEnumerable<Dataltem> items = array.Union(list);
                 return items.OrderByDescending(x => x.vec.Length()).First();
             }
 
@@ -102,17 +94,10 @@ namespace Lab2
             {
                 if (v3s.Count == 0)
                     return null;
-                IEnumerable<Dataltem> array = from elem in (from data in v3s
-                                                            where data is V3DataArray
-                                                            select (V3DataArray)data)
+               
+                IEnumerable<Dataltem> items = from elem in  v3s
                                               from item in elem
                                               select item;
-                IEnumerable<Dataltem> list = from elem in (from data in v3s
-                                                           where data is V3DataList
-                                                           select (V3DataList)data)
-                                             from item in elem
-                                             select item;
-                IEnumerable<Dataltem> items = array.Union(list);
                 IEnumerable<double> query = from i in items
                                             select i.x;
                 var group = query.GroupBy(x=>x);

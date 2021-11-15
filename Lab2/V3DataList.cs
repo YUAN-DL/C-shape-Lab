@@ -85,7 +85,7 @@ namespace Lab2
             return this.ToString() + str;
         }
 
-        public IEnumerator<Dataltem> GetEnumerator()
+        public override IEnumerator<Dataltem> GetEnumerator()
         {
             for (int i = 0; i < list.Count; i++)
                 yield return list[i];
@@ -127,16 +127,13 @@ namespace Lab2
         public bool LoadBinary(string filename,ref V3DataList v3)
         {
             CultureInfo CI = new CultureInfo(System.Threading.Thread.CurrentThread.CurrentCulture.Name);
-            CultureInfo CIen = new CultureInfo("en-US");
-            CultureInfo CIru = new CultureInfo("ru-RU");
-            CultureInfo CIzh = new CultureInfo("zh-CN");
             BinaryReader br = null;
             try
             {
                 br = new BinaryReader(new FileStream(filename, FileMode.Open), Encoding.UTF8);
                 {
                     v3.info = br.ReadString();
-                    v3.date_time=DateTime.Parse(br.ReadString(), new CultureInfo("en-US", true));
+                    v3.date_time=DateTime.Parse(br.ReadString());
                     while (br.BaseStream.Position < br.BaseStream.Length)
                     {
                         string str = br.ReadString();

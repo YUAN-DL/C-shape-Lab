@@ -8,7 +8,7 @@ using System.IO;
 using System.Globalization;
 namespace Lab2
 {
-    public abstract class V3Data
+    abstract class V3Data:IEnumerable<Dataltem>
     {
         public string info { get; protected set; }
         public abstract int Count { get; }
@@ -24,6 +24,13 @@ namespace Lab2
         public override string ToString()
         {
             return base.ToString();
+        }
+
+        public abstract IEnumerator<Dataltem> GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
     }
 }
